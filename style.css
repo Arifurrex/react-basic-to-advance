@@ -1,0 +1,31 @@
+body {
+  background-color: rgb(217, 219, 220);
+}
+.container,
+.container1 {
+  max-width: 450px;
+  margin: 0 auto;
+  border: 0.5px solid rgba(0, 0, 0, 0.305);
+  padding: 12px 36px;
+  text-align: center;
+  box-shadow: 2px 14px 14px rgba(0, 0, 0, 0.237);
+  border: none;
+  background-color: aliceblue;
+}
+.container1 {
+  margin-top: 1rem;
+}
+#display,
+#display1 {
+  color: rgb(82, 80, 80);
+  font-size: 46px;
+}
+#button,
+#button1 {
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  background: blue;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
