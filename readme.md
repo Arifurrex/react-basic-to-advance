@@ -1,4 +1,4 @@
-কেন react useful ? কেন react lagbe ?
+# কেন react useful ? কেন react lagbe ?
 
 ```sh
 <div class="container">
@@ -71,3 +71,71 @@
 ```
 
 এটা লার্জার application এর জন্যে applicable না ।সে জন্যে react আসছে
+
+# whyNeedReactandProblemSolve এই branch e amrar react js add korbo (uporer counter system ta amra vanilla js diye korecilam ta akon amra korbo react js diye)
+
+## how to add react js
+
+[add react to a website](https://legacy.reactjs.org/docs/add-react-to-a-website.html)
+
+### with cdn
+
+```sh
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="root"></div>
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="counter.js"></script>
+
+</body>
+  </body>
+</html>
+
+```
+
+counter js file
+
+```
+console.log(React);
+console.log(ReactDOM);
+
+const domContainer = document.querySelector('#root');
+// render: ƒ render(element, container, callback)
+// render() method 2ta parameter recive kore 1.ki print korbe 2. kon jaigai print korbo
+ReactDOM.render('hello world', domContainer);
+
+```
+
+![Screenshot_1](https://user-images.githubusercontent.com/48369328/232146887-e6c96654-1496-4c63-94b2-f6f49824f153.png)
+
+both are object
+
+React হল htmlগলো generate করবে আর create করবে
+
+![Screenshot_2](https://user-images.githubusercontent.com/48369328/232147805-30d5c220-c8a7-4464-a4c0-52fec3ddb430.png)
+
+ReactDOM হল আমাদের browser এর dom এ render করবে যেন আমরা ডেকতে পাই
+
+![Screenshot_3](https://user-images.githubusercontent.com/48369328/232148122-12460a38-0c89-4eec-9bec-cf8546d4c3bd.png)
+
+তাহলে ২ টা আলাদা কেন ? কারণ react সুদমাত্র browser এর জন্যে বানান হয় নাই । react mobile এর জন্য ও বান্নান হয়েছে । তখন আমরা ReactDOM এর পরিবর্তে ReactNative use করব
+
+আমরা always use করব react । ৯০% কাজ করবে react . এবং বাকি কাজ করবে ReactDOM display করার জন্যে
+
+#note
+ReactDOM.render is no longer supported in React 18
+
+render: ƒ render(element, container, callback)
+
+result
+
+![Screenshot_4](https://user-images.githubusercontent.com/48369328/232157934-314dfb80-59f3-4915-8f13-534e88e01d52.png)
