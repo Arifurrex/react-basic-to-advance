@@ -115,17 +115,17 @@ ReactDOM.render('hello world', domContainer);
 
 ```
 
-![Screenshot_1](https://user-images.githubusercontent.com/48369328/232146887-e6c96654-1496-4c63-94b2-f6f49824f153.png)
+![Screenshot 2023-04-24 203323](https://user-images.githubusercontent.com/48369328/234030878-285ac780-1f7f-41c3-bf9b-e1f146fb8062.png)
 
 both are object
 
 React হল htmlগলো generate করবে আর create করবে
 
-![Screenshot_2](https://user-images.githubusercontent.com/48369328/232147805-30d5c220-c8a7-4464-a4c0-52fec3ddb430.png)
+![Screenshot 2023-04-24 204620](https://user-images.githubusercontent.com/48369328/234032377-ba905adc-cef0-45dc-b66a-119315f7721e.png)
 
 ReactDOM হল আমাদের browser এর dom এ render করবে যেন আমরা ডেকতে পাই
 
-![Screenshot_3](https://user-images.githubusercontent.com/48369328/232148122-12460a38-0c89-4eec-9bec-cf8546d4c3bd.png)
+![Screenshot 2023-04-24 204824](https://user-images.githubusercontent.com/48369328/234033089-54cc0e6a-c4ba-4a61-941e-103ef3e736c8.png)
 
 তাহলে ২ টা আলাদা কেন ? কারণ react সুদমাত্র browser এর জন্যে বানান হয় নাই । react mobile এর জন্য ও বান্নান হয়েছে । তখন আমরা ReactDOM এর পরিবর্তে ReactNative use করব
 
@@ -138,7 +138,7 @@ render: ƒ render(element, container, callback)
 
 result
 
-![Screenshot_4](https://user-images.githubusercontent.com/48369328/232157934-314dfb80-59f3-4915-8f13-534e88e01d52.png)
+![Screenshot 2023-04-24 205214](https://user-images.githubusercontent.com/48369328/234034021-2d68204c-b905-4f37-8f64-227703e2fecd.png)
 
 ### ReactDOM diye amra sodomatro text render korechi . কিন্তু আমরা চাইলে যে কুন কিছ render করতে পরি । তার জন্যে আমরা use করব React library . react amader kicho useful function diyeche jegolo diye amra react element banate pari
 
@@ -162,8 +162,7 @@ React.createElement এর মদ্যমে আমরা আমদের এ�
 
 last এ আমরা ReactDOM কে বলে দিলাম myElement কে root div এ render কর  
 ReactDOM.render(myElemnt, domContainer);
-
-![Screenshot_6](https://user-images.githubusercontent.com/48369328/232230160-9e34c244-2867-4c4b-8aec-55028579a1bb.png)
+![Screenshot 2023-04-24 205414](https://user-images.githubusercontent.com/48369328/234034603-10d49f58-43e5-4b34-8863-fc590a498229.png)
 
 ## কিভাবে React.createElement() এর মদ্যমে div এর মদ্যে p add korbo
 
@@ -192,7 +191,7 @@ const myElemnt2 = React.createElement("div", null, React.createElement("p",null,
 ReactDOM.render(myElemnt2, domContainer2);
 ```
 
-![Screenshot_5](https://user-images.githubusercontent.com/48369328/232230200-eee3b9ac-8a41-47ac-9a92-820b7e52de10.png)
+![Screenshot 2023-04-24 205604](https://user-images.githubusercontent.com/48369328/234035199-e2b1c2e0-130e-4c48-b290-a8ff1e969448.png)
 
 ## যদি div এর মদ্যে ২ টা p দিতে চাই
 
@@ -251,7 +250,7 @@ domContainer.appendChild(p);
 
 result
 
-![Screenshot_7](https://user-images.githubusercontent.com/48369328/232501377-730f27c2-b151-4c1b-a7e7-f168946c5f61.png)
+![Screenshot 2023-04-24 205754](https://user-images.githubusercontent.com/48369328/234035696-412c60d2-e30c-4744-af0f-4ad72f24add6.png)
 
 html এ আমরা এভাবে ই লিখী । কারণ এই সীনটেক্স টা মদের জন্যে সহজ
 
