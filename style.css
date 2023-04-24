@@ -21,7 +21,8 @@ body {
   font-size: 46px;
 }
 #button,
-#button1 {
+#button1,
+button {
   padding: 1rem 2rem;
   font-size: 1rem;
   background: blue;

@@ -15,7 +15,7 @@ const domContainer = document.querySelector('#root');
 
 // ! create react element using jsx
 const myElement = (
-    <div>
+    <div class="container">
         <h1 id="display">0</h1>
         <div>
             <button>Increment + </button>

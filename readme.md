@@ -325,3 +325,58 @@ React.createElement(
 
 
 ```
+
+কিন্ত কথা হচ্ছে এই কোডেটা জাভাস্ক্রীপ্ট ফাইল এ লিকচি কিন্ত জাভাস্ক্রীপ্ট jxs কোড বুজে না
+
+```sh
+const myElement = (
+    <div>
+        <h1 id="display">0</h1>
+        <div>
+            <button>Increment + </button>
+        </div>
+    </div>
+
+)
+ReactDOM.render(myElement, domContainer);
+```
+
+সেই জন্যে আমাদের use করতে হবে transpiler যেমন-bable ।
+babel এই jsx কে vanilla javascript এ transpile করবে
+
+![Screenshot 2023-04-24 211737](https://user-images.githubusercontent.com/48369328/234041263-73d5c377-ffde-487a-a507-57d3865373e7.png)
+
+transpile করার জন্যে আমরা babel ওয়েবসাইট এর সেটাপ এ গিয়ে লিংক টা কপি করে আমাদের index। html ফাইল rakbo
+
+https://babeljs.io/setup/#installation
+
+```
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel" src="counter.js"></script>
+```
+
+<script type="text/babel" src="counter.js"></script>
+
+type="text/babel" টাইপ="টেক্সট/বাবেল" দিব
+
+সদারণত থাকে type="text/js"
+
+counter.js file ta babel diye gore asbe
+
+```
+const myElement = (
+    <div class="container">
+        <h1 id="display">0</h1>
+        <div>
+            <button>Increment + </button>
+        </div>
+    </div>
+
+)
+ReactDOM.render(myElement, domContainer);
+```
+
+### still why we use react ?
+
+আমাদের এই কাউন্টার এর বাটন এ ক্লিক করলে increment হবে তা কিভাবে করব । এই ফাংশনালিটি গুলো কোথায়
+অদ্য করব
