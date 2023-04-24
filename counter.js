@@ -1,7 +1,26 @@
-console.log(React);
-console.log(ReactDOM);
-
 const domContainer = document.querySelector('#root');
-// render: ƒ render(element, container, callback)
-// render() method 2ta parameter recive kore 1.ki print korbe 2. kon jaigai print korbo
-ReactDOM.render('hello world', domContainer);
+// const myElemnt = React.createElement("div", null,[
+//     React.createElement("p", null, "hello world"),
+//     React.createElement("p", null, "hello world")
+// ]);
+// ReactDOM.render(myElemnt, domContainer);
+
+
+//! vanilla js
+// let p = document.createElement("p");
+// p.innerHTML = "hello vanilla js";
+// domContainer.appendChild(p);
+
+
+
+// ! create react element using jsx
+const myElement = (
+    <div>
+        <h1 id="display">0</h1>
+        <div>
+            <button>Increment + </button>
+        </div>
+    </div>
+    
+)
+ReactDOM.render(myElement, domContainer);
