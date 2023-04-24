@@ -380,3 +380,18 @@ ReactDOM.render(myElement, domContainer);
 
 আমাদের এই কাউন্টার এর বাটন এ ক্লিক করলে increment হবে তা কিভাবে করব । এই ফাংশনালিটি গুলো কোথায়
 অদ্য করব
+
+```sh
+const domContainer = document.querySelector('#root');
+// ! create react element using jsx
+const myElement = (
+    <div class="container">
+        <h1 id="display">0</h1>
+        <div>
+            <button>Increment + </button>
+        </div>
+    </div>
+
+)
+ReactDOM.render(myElement, domContainer);
+```
