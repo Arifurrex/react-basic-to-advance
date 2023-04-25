@@ -1,12 +1,23 @@
 const domContainer = document.querySelector('#root');
 // ! create react element using jsx
-const myElement = (
-    <div class="container">
-        <h1 id="display">0</h1>
+const Increment = () => {
+    // const reactState = React.useState(0);
+    const [counter,setCounter] = React.useState(0);
+    return(<div className="container">
+        <h1 id="display">{counter}</h1>
         <div>
-            <button>Increment + </button>
+            <button id="button" onClick={()=>setCounter(counter + 1) }> Increment + </button>
         </div>
+    </div>)
+};
+ReactDOM.render(
+    <div>
+    <Increment />
+    <Increment />
+    <Increment /> 
     </div>
-    
-)
-ReactDOM.render(myElement, domContainer);
+   ,
+    domContainer
+   );
+
+

@@ -1,14 +1,15 @@
 # কেন react useful ? কেন react lagbe ?
 
 ```sh
-<div class="container">
+ <div class="container">
       <div>
         <h1 id="display">0</h1>
         <div>
           <button id="button">Increment +</button>
         </div>
       </div>
-    </div>
+ </div>
+
 
     <script>
       const display = document.getElementById("display");
@@ -19,14 +20,14 @@
         counter++;
         display.textContent = counter;
       });
-      </script>
+    </script>
 
 ```
 
 একটা মাত্র counter এর জন্যে এভাবে টিক আছে । কিন্ত
 এটা লার্জার application এর জন্যে applicable না ।
 
-যদি আমাদের aro একটা কাউন্টার এর দরকার হয় । তাহলে আমাদের aro একটা কাউন্টার ক্রিয়েট করা লাগবে । তারপর id o class golo change করা লাগবে । তারপর js file এ id o class গলো ছাগয়ে করা লাগবে
+যদি আমাদের aro একটা কাউন্টার এর দরকার হয় । তাহলে আমাদের aro একটা counter ক্রিয়েট করা লাগবে । তারপর id আর class golo change করা লাগবে । তারপর js file এ id আর class গলো change করা লাগবে
 
 ```sh
  <!-- কেন react useful ? কেন react lagbe ? -->
@@ -376,7 +377,7 @@ const myElement = (
 ReactDOM.render(myElement, domContainer);
 ```
 
-### still why we use react ?
+## still why we use react ?
 
 আমাদের এই কাউন্টার এর বাটন এ ক্লিক করলে increment হবে তা কিভাবে করব । এই ফাংশনালিটি গুলো কোথায়
 অদ্য করব
@@ -395,3 +396,297 @@ const myElement = (
 )
 ReactDOM.render(myElement, domContainer);
 ```
+
+myElement টা কে simply Increment নামে function এর মদ্যে নিয়ে sekan theke return kore debo নেব.
+এর পর ReactDOM.render(Increment(), domContainer); এ increment() function ক্ call kore debo
+
+```sh
+const domContainer = document.querySelector('#root');
+// ! create react element using jsx
+const Increment = () => {
+    return(<div class="container">
+        <h1 id="display">0</h1>
+        <div>
+            <button>Increment + </button>
+        </div>
+    </div>)
+};
+ReactDOM.render(Increment(), domContainer);
+```
+
+still kaj korbe
+Increment() না লিখে <Increment /> এভাবে লিকতে পারবে । এটা jsx এ call করার সিস্টেম
+
+kaj korche
+
+![Screenshot 2023-04-25 001619](https://user-images.githubusercontent.com/48369328/234081819-4d4b582e-8267-48eb-9001-d8f21fd0463d.png)
+
+## button a click korle kivabe increment hobe
+
+```let num = 0;
+const display = document.querySelector("#display");
+const button = document.querySelector('#button');
+
+button.addEventListener('click', function () {
+    num++;
+    display.textContent=num
+})
+```
+
+ei code ta increment function er niche bosate hobe.ReactDOM.render(<Increment />, domContainer); এর ও নিচে বসতে হবে
+
+যেমন
+
+```sh
+const domContainer = document.querySelector('#root');
+// ! create react element using jsx
+const Increment = () => {
+    return(<div className="container">
+        <h1 id="display">0</h1>
+        <div>
+            <button id="button">Increment + </button>
+        </div>
+    </div>)
+};
+ReactDOM.render(<Increment />, domContainer);
+
+let num = 0;
+const display = document.querySelector("#display");
+const button = document.querySelector('#button');
+
+button.addEventListener('click', function () {
+    num++;
+    display.textContent=num
+})
+
+```
+
+এখন কাজ করবে । কিন্ত কাজ করলেও system টা ত আগের মতো vanilla js এর মতো রইল । এখন আমাদের dom element দরতে হচ্ছে const display = document.querySelector("#display");
+dom এ manually content render করতে হচ্ছে display.textContent=num
+
+এবং counter এক এর বেশি হলে আবার কোড dublicate করতে হচ্ছে
+
+তাহলে react এখানে আমাদের কি বেনিফিট দিচ্ছে। befinte পাচ্ছিনা কারণ আমরা react এর সবগলো এখন ও use করি নাই
+
+most important হল আমরা state কে use করি নাই
+
+তাহলে state কি জিনিস । state হল data যা আমরা আমাদের ui এ ইউজ করি
+
+এখানে একটাই state আছে তা হল num=0 । কারণ এই একটাই data change হচ্ছে । এবং সেটার উপর base করে content এর data change হচ্ছে
+
+আমাদের html element এ আমাদের onekgolo state variable থাকতে পারে । react আমাদের এগোল niye কাজ করতে হেল্প করে ।
+react বলছে তুমি যদি আমার way তে কাজ কর তবে তোমাকে dom নিয়ে কোন কাজ করতে হবে না । dom react নিজে manage করে । আমরা যদি সময়মতো state change করে দিয়ে react dom manage করে দিবে
+
+lets see how react work for us
+
+```sh
+const domContainer = document.querySelector('#root');
+// ! create react element using jsx
+const Increment = () => {
+    const reactState = React.useState();
+    return(<div className="container">
+        <h1 id="display">0</h1>
+        <div>
+            <button id="button">Increment + </button>
+        </div>
+    </div>)
+};
+ReactDOM.render(<Increment />, domContainer);
+
+// let num = 0;
+// const display = document.querySelector("#display");
+// const button = document.querySelector('#button');
+
+// button.addEventListener('click', function () {
+//     num++;
+//     display.textContent=num
+// })
+
+```
+
+আমরা নিচের কোড কমেন্ট করে দেব র increment ফাংশন এর বেতরে একটা variable'নিব reactState নামে ।
+তাতে assign করব react এর building মেথড useState React.useState()
+
+এই useState() মেথড টা আমাদের increment ফাংশন এর state manage করে দিবে
+
+useState() এ bydefault একটা value দিয়ে দিতে হয় যেটা আমাদের react state এর default ভ্যালু হিসাবে initially set করে রাখে
+
+এখানে আমাদের state হল num variable টা । so আমরা সেটার ভ্যালু bydefault useState কে দিয়ে দিলাম 0 ।
+
+আমরা চাইলে এখানে useState()এ আমরা যেকোন ভ্যালু দিয়ে দিতে পারব । হতে পারে এটা array , object ,string or null or anything ।
+
+```sh
+const domContainer = document.querySelector('#root');
+// ! create react element using jsx
+const Increment = () => {
+    const reactState = React.useState(0);
+    console.log(reactState);
+    return(<div className="container">
+        <h1 id="display">0</h1>
+        <div>
+            <button id="button">Increment + </button>
+        </div>
+    </div>)
+};
+ReactDOM.render(<Increment />, domContainer);
+
+```
+
+const reactState = React.useState(0);
+
+console.log(reactState);
+
+![Screenshot 2023-04-25 090531](https://user-images.githubusercontent.com/48369328/234164562-ef3b45db-e52a-4c4c-a864-cb1b2a1eeac1.png)
+
+useState() ফাংশটা আমাদের একটা array return করছে যার দুইটা element আছে  
+প্রথমটা হল আমাদের state এর value টা ।
+দিতীয়টা হল একটা function । এই ফাংশনটর কাজ হল যে parameter আমরা এই ফাংশন
+কে দিব সে ওই value টা আমাদের state এ update করে দিবে
+
+এর মানে হল এই function টা আমাদের state এর counter এর value টা আপডেট করে দিতে
+help করে
+
+## array destructure
+
+array destruring করে আমরা দুইটা জিনিস কে আলাদা করে দুইটা
+variable এর মদ্যে নিয়ে নিলাম
+
+```sh
+const domContainer = document.querySelector('#root');
+// ! create react element using jsx
+const Increment = () => {
+    // const reactState = React.useState(0);
+    const [counter,setCounter] = React.useState(0);
+    return(<div className="container">
+        <h1 id="display">{counter}</h1>
+        <div>
+            <button id="button">Increment + </button>
+        </div>
+    </div>)
+};
+ReactDOM.render(<Increment />, domContainer);
+```
+
+array destruring করে আমরা দুইটা জিনিস কে আলাদা করে দুইটা
+variable এর মদ্যে নিয়ে নিলাম
+
+const [counter,setCounter] = React.useState(0);
+
+তাহলে কাউন্টার এর ভেতরে থাকছে initial value 0 আর এবং
+secondly setCounter variable টা হল একটা function । যেটা দিয়ে আমরা counter এর value টা change করতে পরি
+
+{counter} interpolation এর modde counter variable টা দিলে আমরা initial value 0 পেয়ে যাব
+
+## কিভাবে বাটন এ ক্লিক করলে counter update হবে
+
+<button id="button" onclick="increment()"> Increment + </button>
+বা
+<button onclick="myFunction()">Click me</button>
+
+javascript এ amra onclick এভাবে লিখি
+
+jsx এ
+
+<button id="button" onClick={()=>setCounter(counter + 1) }> Increment + </button>
+
+এভাবে লিখতে হবে কারণ এটা jsx । onClick এর C capital hobe equel = dite hobe
+তারপর { } interpolation দিতে হবে
+setCounter(counter + 1 ) কল করতে হবে । কিন্ত এভাবে call করে দিলে runtime এ এটা কল হয়ে যাবে ।
+so আমরা চাচ্ছি যখন বাটন এ ক্লিক করবে তখনই fire হবে । তার জন্যে ()=> arrow function এর মদ্যে দিতে হবে টা setCounter(counter + 1) এই ফাংশন কে রিটার্ন করবে । যাতে call না হয়ে যায়
+
+<button id="button" onClick={()=>setCounter(counter + 1) }> Increment + </button>
+
+```sh
+const domContainer = document.querySelector('#root');
+// ! create react element using jsx
+const Increment = () => {
+    // const reactState = React.useState(0);
+    const [counter,setCounter] = React.useState(0);
+    return(<div className="container">
+        <h1 id="display">{counter}</h1>
+        <div>
+            <button id="button" onClick={()=>setCounter(counter + 1) }> Increment + </button>
+        </div>
+    </div>)
+};
+ReactDOM.render(<Increment />, domContainer);
+```
+
+![Screenshot 2023-04-25 111308](https://user-images.githubusercontent.com/48369328/234180390-578193b6-691e-45c0-8dcd-f9ff67e8040e.png)
+
+## তাহলে react use করে কি সবিধা টা হল ?
+
+প্রথম সুবিধাটা হল আমাদের কে manually dom এর কোন element দরতে হবে না যেমন -
+const display = document.querySelector("#display");
+display.textContent=num
+
+এভাবে করতে হল না
+
+```
+let num = 0;
+const display = document.querySelector("#display");
+const button = document.querySelector('#button');
+
+button.addEventListener('click', function () {
+    num++;
+    display.textContent=num
+})
+```
+
+এটা করা লাগবে না
+
+প্রথম সুবিধাটা হল আমাদের কে manually dom এর কোন element দরতে হবে না আর state আর counter এর
+value change হলে manually dom এ render করা লাগলো না । আমাদের old js file এ বারবার manually dom
+update করা লাগছে । react এ আমরা ভ্যালু টা change করছি reactdom নিজে নিজে তা dom এ আপডেট করে দিচ্ছে
+। মনে reactive সে । এটা হল first benifit
+
+react এর main beauty টা হল - আমরা যদি চাই এই কাউন্টার একটার জায়গায় অনেকগোল লাগবে তাহলে component টা কয়েকবার লিখলে চলবে । যেমন --
+
+```
+ReactDOM.render(
+    <div>
+    <Increment />
+    <Increment />
+    <Increment />
+    </div>
+   ,
+    domContainer
+   );
+```
+
+```sh
+const domContainer = document.querySelector('#root');
+// ! create react element using jsx
+const Increment = () => {
+    // const reactState = React.useState(0);
+    const [counter,setCounter] = React.useState(0);
+    return(<div className="container">
+        <h1 id="display">{counter}</h1>
+        <div>
+            <button id="button" onClick={()=>setCounter(counter + 1) }> Increment + </button>
+        </div>
+    </div>)
+};
+ReactDOM.render(
+    <div>
+    <Increment />
+    <Increment />
+    <Increment />
+    </div>
+   ,
+    domContainer
+   );
+
+```
+
+![Screenshot 2023-04-25 234816](https://user-images.githubusercontent.com/48369328/234360033-5a288545-0e29-4a85-b6cd-d2fbb4510c51.png)
+
+টিকমত কাজ করছে আর every state টিক মতো manage হচ্ছে । এক এক জায়গায় কাউন্টার এর ভ্যালু এক এক রকম
+আমাদের কোন কোড dublicate করা লাগলোনা । তারমানে আমরা পুরো functionality সহ self contain block of component বানাতে পারছি । যার দনিয়া সম্পর্ন আলাদা তাখছে আর differnt দনিয়া create করতে পারছে component call করে। মনে আমরা কম্পোনেন্ট কে reuse করতে পারছি <Increment /> <Increment /> <Increment /> । তাই react কে component library বলা হয়
+
+একটা react application এ multiple component থাকবে আর সবাই self contain functionality নিয়ে বসে থাকবে । একটা react component কে আমরা separate appliction ও বলতে পরি। আমরা একবারে component টা
+লিখব আর যতবার প্রয়োজন আমরা component টা কে আমাদের application এ reuse করব
+
+component গলো একবারে আলাদা হওয়ার কারণে বড় team এ separate developer separate component নিয়ে
+কাজ করতে পারবে । finally egolo কে জোড়া লাগিয়ে একটা বিশাল web application বানান possible হয়।
+এটাই react js এর beauty
