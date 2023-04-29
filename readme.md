@@ -39,3 +39,60 @@ process টা slow
 - যখন আমরা dom এর কোন কিছু change অথবা update করি browser কে এই render tree আবার create করতে হয় । সমস্ত style information মানে css আবার recalculate করতে হয় এবং ফাইনালি paint করতে হয় । এই কাজগুলো মূলত slow
 
 ![Screenshot 2023-04-29 103151](https://user-images.githubusercontent.com/48369328/235283504-1ba186c4-a4fd-4f5a-9ac7-515a9f4ef628.png)
+
+# optimize
+
+currently single page is very popular rather than uwsing multiple page. user exprience এর জন্যে page reload করা এখন কেও
+like করে না । এক্ষেত্রে একটা page এ আমাদের অনেক অনেক dom operation আমাদের handle করতে হয়.
+
+facebook and gmail are like single page website. user হিসাবে ফেসবুক এর একটা বাটন এ ক্লিক করলে screen অনেকগুলো জায়গায় change হয় মানে অনেকগুলো জায়গায় dom operation হয়ে থাকে । এক পেইজ এ অনেকগুলো dom এলিমেন্ট থাকাতে সেগুলোকে continously and freequently change করতে থাকলে একসময় definatly
+সেগুলো performance কে impact করবে ।
+
+তাহলে dom ই যদি আমরা ইউজ করি । তবে maximum আমাদের কি করতে হবে। আমরা dom কে 2 ভাবে optimize করতে পরি
+
+1. batch update
+2. যত কম dom operation করা যায়
+
+## _batch update:_
+
+_fast process_
+
+```sh
+let array = [];
+increment = 0;
+let container = document.querySelector('.container');
+
+while (increment < 10000) {
+    array.push(increment++);
+};
+
+container.innerHTML = array.join(' ');
+
+```
+
+এখানে container.innerHTML = array.join(' '); এই dom operationটা একবার হচ্ছে। সেই কারণে এই codeটা fast। এটাকে batch আপডেট বলা হয়
+
+_slow process_
+
+```sh
+let array = [];
+increment = 0;
+let container = document.querySelector('.container');
+
+while (increment < 10000) {
+    increment++;
+    container.innerHTML +=' ' + increment;
+};
+
+```
+
+১০০০০ বার ই container.innerHTML +=' ' + increment; এই কোডেটা বা dom operation টা চালানো হচ্ছে.১০০০০ বার dom অপারেশন টা চালানোর জন্যে এই code টা slow
+
+actually time javascript করতে লাগে নাই । time লেগেছে dom operation টা করতে ।
+
+infact dom কে update করতে তার সময় লাগে নাই । সময় লেগেছে কারণ তাকে browser এর repaint process এর মধ্যে দিয়ে ১০০০০ বার যাওয়া লাগছে
+
+so, virtual dom ছাড়াও batch update করা যায়। batch আপডেট টা আমরা খেয়াল করে করলে আমরা achive করতে পরি। infact সেটা আমরা dom ডিরেক্ট manipulate করে করতে পরি ।
+
+কিন্তু exectly যে element টা change হয়েছে সেটাকে update করার এই beauty টা achive করার জন্যে reactকে কি করতে হবে update করার আগের অবস্তা আর update করার পরের অবস্তা দুইটা separate snapshot রাখতে হবে যেন সে দুইটার মধ্যে compare করতে পারে । react সেই কাজটাই করে । কিন্ত dom এর মধ্যে থেকে সেটা করা problematic । সেজন্যে react যে কাজটা করেছে তা হল সে নিজের মতো তার আলাদা dom বানিয়ে নিয়েছে । যেখানে তার এসব repaint করার জামেলা নাই সে সেখানে javascript object নিয়ে কাজ করতে পারবে । যেখানে তার ব্রাউজার এর নিয়ম মানতে হবে না । just simple raw javascript object বানিয়ে সে browser এর dom এর একটা replica তোয়রি করে নিয়েছে যেটার নাম হল virtual dom
+এই virtual dom এ কাজ করা অনেক cheap । browser এর dom এর মতো expensive না । এটা react developer দের সম্পর্ন control এ থাকছে । এখানে browser এর dom এর মতো repaint করার কোন জামেল থাকছে না।
